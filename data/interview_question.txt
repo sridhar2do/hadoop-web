@@ -1,0 +1,7 @@
+CREATE TABLE hadoopinterviewqa (
+	questionid MEDIUMINT NOT NULL AUTO_INCREMENT,
+	modulename CHAR(30),
+	question TEXT NOT NULL,
+	answer TEXT NOT NULL,
+	PRIMARY KEY (questionid)
+) ENGINE=MyISAM;
