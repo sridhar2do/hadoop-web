@@ -1,17 +1,25 @@
 <?php
 
-include 'connection/hadoopqaconnection.php';
+include '../connection/hadoopqaconnection.php';
 
-$moduleName=$_POST['moduleName'];
-$question=$_POST['question'];
-$answer=$_POST['answer'];
+$category_id = $_POST['moduleName'];
+$question = $_POST['question'];
+$answer = $_POST['answer'];
 $answer = mysql_real_escape_string($answer);
 
-$sql="insert into $tableName(`modulename`,`question`, `answer`)  values('$moduleName','$question','$answer')";
-mysql_query($sql);
+if( isset($_POST['recordId']) ) {
 
-//$data = array('success'=> $sql);
-$data = array('success'=> 'Inserted Successfully');
+    $sql = "UPDATE " . $tableName . " SET `question` = '" . $question . "', `answer` = '" . $answer . "', category_id = " . $category_id . " WHERE `id` = " . $_POST['recordId'];
+    mysql_query($sql);
+
+} else {
+
+    $sql = "insert into " . $tableName . "(`category_id`,`question`, `answer`)  values($category_id,'$question','$answer')";
+    mysql_query($sql);
+
+    $data['recordId'] = mysql_insert_id();
+
+}
+
+$data['success'] =  'Inserted Successfully';
 echo json_encode($data);
-?>
-	

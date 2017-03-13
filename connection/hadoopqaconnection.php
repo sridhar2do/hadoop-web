@@ -1,13 +1,15 @@
 <?php
-    $servername = "localhost";
-    $username = "username";
-    $password = "password";
+    $host = "localhost";
+    $userName = "root";
+    $password = "admin123";
+    $dbName = "npntraining";
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password);
+    $tableName = "interview_questions";
+    $tblCategory = "interview_category";
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    echo "Connected successfully";
+//    error_reporting(E_ALL ^ E_NOTICE);
+//    $con = mysqli_connect( $host, $userName, $password, $dbName);
+    $con = mysql_connect( $host, $userName, $password);
+    mysql_select_db($dbName);
+
+    if (mysql_errno()) echo "Failed to connect to MySQL: " . mysql_error();
